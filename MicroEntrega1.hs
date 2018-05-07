@@ -1,4 +1,4 @@
---module MicroEntrega1 where
+module MicroEntrega1 where
 
 type Acumulador = Float
 type Posiciones = Int
