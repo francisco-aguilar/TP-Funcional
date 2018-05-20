@@ -13,17 +13,17 @@ type Instruccion = Microprocesador -> Microprocesador
 -- La etiqueta es de tipo String ya que nos debe imprimir en pantalla un mensaje de error. 
 
 data Microprocesador = Microprocesador {
-										memoriaDeDatos :: [Posiciones],
-										acumuladorA :: Acumulador,
-										acumuladorB :: Acumulador,
-										programCounter :: Contador,
-										etiqueta :: Etiqueta,
-										programas :: [Instruccion]
-										}
+                                        memoriaDeDatos :: [Posiciones],
+                                        acumuladorA :: Acumulador,
+                                        acumuladorB :: Acumulador,
+                                        programCounter :: Contador,
+                                        etiqueta :: Etiqueta,
+                                        programas :: [Instruccion]
+                                        }
 
-xt8088 = Microprocesador {memoriaDeDatos = [1, 2, 3, 4, 5], acumuladorA = 0, acumuladorB = 0, programCounter = 0, etiqueta = ""}
-fp20 = Microprocesador {memoriaDeDatos = [], acumuladorA = 7, acumuladorB = 24, programCounter = 0, etiqueta = ""}
-at8086 = Microprocesador {memoriaDeDatos = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], acumuladorA = 0, acumuladorB = 0, programCounter = 0, etiqueta = ""}
+xt8088 = Microprocesador {memoriaDeDatos = [1, 2, 3, 4, 5], acumuladorA = 0, acumuladorB = 0, programCounter = 0, etiqueta = "", programas = []}
+fp20 = Microprocesador {memoriaDeDatos = [], acumuladorA = 7, acumuladorB = 24, programCounter = 0, etiqueta = "", programas = []}
+at8086 = Microprocesador {memoriaDeDatos = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], acumuladorA = 0, acumuladorB = 0, programCounter = 0, etiqueta = "", programas = []}
 
 
 nop :: Instruccion 
@@ -86,9 +86,8 @@ cargarPrograma programa microprocesador = microprocesador {programas = programa 
 --Punto 3.2.--
 
 ejecutarInstruccion :: Microprocesador -> Instruccion -> Microprocesador
-ejecutarInstruccion microprocesador instruccion 	| (etiqueta microprocesador) /= "" = microprocesador
-													| otherwise = (nop.instruccion) microprocesador
-
+ejecutarInstruccion microprocesador instruccion     | (etiqueta microprocesador) /= "" = microprocesador
+                                                    | otherwise = (nop.instruccion) microprocesador
 --------------------------------------------------------------------------------------------------------------------------------------------
 
 --Punto 3.3.--
@@ -155,6 +154,3 @@ microMmInfinita = Microprocesador {memoriaDeDatos = [0..], acumuladorA = 0, acum
 
 --memoriaOrdenada at8086
 --memoriaOrdenada microDesorden
-
-
-
